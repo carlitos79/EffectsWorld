@@ -29,16 +29,9 @@ namespace WandererWorld
         private HeightMapComponent heightMapComponent;
         private HeightMapCameraComponent heightMapCameraComponent;
 
-        //private RobotComponent robotComponent;
-        //private RobotCameraComponent robotCameraComponent;
-
         private HeightmapSystem heightMapSystem;        
         private IUpdateSystem heightMapTranformSystem;
         private IRenderSystem heightMapRenderSystem;
-
-        //private RobotSystem robotSystem;
-        //private IUpdateSystem robotTranformSystem;
-        //private IRenderSystem robotRenderSystem;
 
         private CollisionSystem collisionSystem;
         private HouseSystem houseSystem;
@@ -71,15 +64,9 @@ namespace WandererWorld
             heightMapComponent = new HeightMapComponent();
             heightMapCameraComponent = new HeightMapCameraComponent();
 
-            //robotComponent = new RobotComponent();
-
             heightMapSystem = new HeightmapSystem();
             heightMapTranformSystem = new HeightMapTranformSystem();
-            heightMapRenderSystem = new HeightMapRenderSystem();                   
-
-            //robotSystem = new RobotSystem();
-            //robotTranformSystem = new RobotTranformSystem();
-            //robotRenderSystem = new RobotRenderSystem();
+            heightMapRenderSystem = new HeightMapRenderSystem();      
 
             collisionSystem = new CollisionSystem();
             houseSystem = new HouseSystem(this);
@@ -130,19 +117,6 @@ namespace WandererWorld
             };
             heightMapCameraComponent.Frustum = new BoundingFrustum(heightMapCameraComponent.ViewMatrix * heightMapCameraComponent.ProjectionMatrix);
 
-            //var h1 = new HouseComponent(new Vector3(40, 100, 40), new Vector3(100, 50, -100), Matrix.Identity, BrickTexture, roofTexture);
-            //var h2 = new HouseComponent(new Vector3(40, 100, 40), new Vector3(950, 50, -100), Matrix.Identity, BrickTexture, roofTexture);
-            //var h3 = new HouseComponent(new Vector3(40, 100, 40), new Vector3(950, 50, -900), Matrix.Identity, BrickTexture, roofTexture);
-
-            //int h1Id = EntityComponentManager.GetManager().CreateNewEntityId();
-            //EntityComponentManager.GetManager().AddComponentToEntity(h1Id, h1);
-
-            //int h2Id = EntityComponentManager.GetManager().CreateNewEntityId();
-            //EntityComponentManager.GetManager().AddComponentToEntity(h2Id, h2);
-
-            //int h3Id = EntityComponentManager.GetManager().CreateNewEntityId();
-            //EntityComponentManager.GetManager().AddComponentToEntity(h3Id, h3);
-
             int heightMapId = EntityComponentManager.GetManager().CreateNewEntityId();
             EntityComponentManager.GetManager().AddComponentToEntity(heightMapId, heightMapComponent);
             EntityComponentManager.GetManager().AddComponentToEntity(heightMapId, heightMapCameraComponent);
@@ -150,39 +124,6 @@ namespace WandererWorld
             CreateRandomHouses(10, BrickTexture, roofTexture, timberWallTexture, timberRoofTexture);
 
             heightMapSystem.CreateHeightMaps();
-
-            //robotComponent = new RobotComponent
-            //{                
-            //    Speed = 0,                
-            //    Texture = robotTexture,                
-            //    PlaneObjectWorld = Matrix.Identity,
-            //    TransformMatrices = new Matrix[robotModel.Bones.Count],
-            //    Effect = new BasicEffect(graphics.GraphicsDevice),
-            //    Scale = Matrix.CreateScale(0.5f),
-            //    Position = new Vector3(0f, 1300f, 0f),
-            //    RobotProjection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver2, 1280 / 720, 0.1f, 500f),
-            //    RobotView = Matrix.CreateLookAt(new Vector3(70, 50, 30), new Vector3(0, 0, 20), Vector3.Backward)
-            //};
-
-            //robotCameraComponent = new RobotCameraComponent
-            //{
-            //    MaxRotation = MathHelper.PiOver4,
-            //    RotationSpeed = 0.003f,
-            //    ModelRotation = 0,
-            //    Model = robotModel,
-            //    Direction = true,
-            //    LeftArmMatrix = robotModel.Bones["LeftArm"].Transform,
-            //    RightArmMatrix = robotModel.Bones["RightArm"].Transform,
-            //    LeftLegMatrix = robotModel.Bones["LeftLeg"].Transform,
-            //    RightLegMatrix = robotModel.Bones["RightLeg"].Transform,
-            //    Rotation = Quaternion.CreateFromAxisAngle(Vector3.Right, MathHelper.PiOver2) * Quaternion.CreateFromAxisAngle(Vector3.Up, MathHelper.Pi),
-            //    RotationInDegrees = 0
-            //};
-
-            //int robotId = EntityComponentManager.GetManager().CreateNewEntityId();
-            //EntityComponentManager.GetManager().AddComponentToEntity(robotId, robotComponent);
-            //EntityComponentManager.GetManager().AddComponentToEntity(robotId, robotCameraComponent);
-            //robotSystem.CreateRobots();
         }
 
         private void CreateRandomHouses(int nHouses, Texture2D wall1, Texture2D roof1, Texture2D wall2, Texture2D roof2)
@@ -264,7 +205,6 @@ namespace WandererWorld
 
             wanderer.UpdateLimbMovement(gameTime);
             heightMapTransformSystem_Wanderer.UpdateHeightMap_Wanderer(gameTime);
-            //systemsUpdater.Update(heightMapTranformSystem, robotTranformSystem);
 
             base.Update(gameTime);
         }
@@ -277,7 +217,7 @@ namespace WandererWorld
         {            
             GraphicsDevice.Clear(Color.CornflowerBlue);            
 
-            systemRenderer.Render(heightMapRenderSystem/*, robotRenderSystem*/);
+            systemRenderer.Render(heightMapRenderSystem);
             houseSystem.Update();
             wanderer.DrawLimb(gameTime, wandererWorld);
 
