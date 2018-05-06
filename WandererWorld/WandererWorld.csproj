@@ -57,6 +57,7 @@
     <Compile Include="Manager\EntityComponentManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShaderContent\Shader.cs" />
     <Compile Include="Systems\CollisionSystem.cs" />
     <Compile Include="Systems\HeightMapRenderSystem.cs" />
     <Compile Include="Systems\HeightMapSystem.cs" />

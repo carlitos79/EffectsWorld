@@ -152,3 +152,9 @@
 /processorParam:TextureFormat=Color
 /build:wall_texture.jpg
 
+#begin TestShaders.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:TestShaders.fx
+

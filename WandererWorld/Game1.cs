@@ -6,6 +6,7 @@ using System.Diagnostics;
 using WandererWorld.Components;
 using WandererWorld.Interfaces;
 using WandererWorld.Manager;
+using WandererWorld.ShaderContent;
 using WandererWorld.Systems;
 using WandererWorld.WandererContent;
 
@@ -21,6 +22,8 @@ namespace WandererWorld
 
         private Matrix wandererWorld;
         private WandererBody wanderer;
+
+        private Shader shader;
 
         private HeightMapTransformSystem_Wanderer heightMapTransformSystem_Wanderer;
 
@@ -57,7 +60,6 @@ namespace WandererWorld
         protected override void Initialize()
         {
             wandererWorld = Matrix.Identity;
-
             wanderer = new WandererBody(this);
             heightMapTransformSystem_Wanderer = new HeightMapTransformSystem_Wanderer();
 
@@ -94,6 +96,10 @@ namespace WandererWorld
             Texture2D timberWallTexture = Content.Load<Texture2D>("timber_wall");
             Texture2D timberRoofTexture = Content.Load<Texture2D>("timber_roof");
 
+            //This is new
+            Effect shaderEffect = Content.Load<Effect>("TestShaders");
+            shader = new Shader(shaderEffect);
+
             heightMapComponent = new HeightMapComponent
             {
                 HeightMap = heightMapTexture2D,
@@ -123,7 +129,7 @@ namespace WandererWorld
 
             CreateRandomHouses(10, BrickTexture, roofTexture, timberWallTexture, timberRoofTexture);
 
-            heightMapSystem.CreateHeightMaps();
+            heightMapSystem.CreateHeightMaps();            
         }
 
         private void CreateRandomHouses(int nHouses, Texture2D wall1, Texture2D roof1, Texture2D wall2, Texture2D roof2)
@@ -161,6 +167,8 @@ namespace WandererWorld
                     {
                         wall = wall2;
                         roof = roof2;
+
+                        shader.RealisticSettings();
                     }
 
 
