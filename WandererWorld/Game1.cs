@@ -20,8 +20,8 @@ namespace WandererWorld
         SpriteBatch spriteBatch;
 
         private Matrix wandererWorld;
-
         private WandererBody wanderer;
+
         private HeightMapTransformSystem_Wanderer heightMapTransformSystem_Wanderer;
 
         private Random rnd = new Random();
@@ -29,16 +29,16 @@ namespace WandererWorld
         private HeightMapComponent heightMapComponent;
         private HeightMapCameraComponent heightMapCameraComponent;
 
-        private RobotComponent robotComponent;
-        private RobotCameraComponent robotCameraComponent;
+        //private RobotComponent robotComponent;
+        //private RobotCameraComponent robotCameraComponent;
 
         private HeightmapSystem heightMapSystem;        
         private IUpdateSystem heightMapTranformSystem;
         private IRenderSystem heightMapRenderSystem;
 
-        private RobotSystem robotSystem;
-        private IUpdateSystem robotTranformSystem;
-        private IRenderSystem robotRenderSystem;
+        //private RobotSystem robotSystem;
+        //private IUpdateSystem robotTranformSystem;
+        //private IRenderSystem robotRenderSystem;
 
         private CollisionSystem collisionSystem;
         private HouseSystem houseSystem;
@@ -71,15 +71,15 @@ namespace WandererWorld
             heightMapComponent = new HeightMapComponent();
             heightMapCameraComponent = new HeightMapCameraComponent();
 
-            robotComponent = new RobotComponent();
+            //robotComponent = new RobotComponent();
 
             heightMapSystem = new HeightmapSystem();
             heightMapTranformSystem = new HeightMapTranformSystem();
             heightMapRenderSystem = new HeightMapRenderSystem();                   
 
-            robotSystem = new RobotSystem();
-            robotTranformSystem = new RobotTranformSystem();
-            robotRenderSystem = new RobotRenderSystem();
+            //robotSystem = new RobotSystem();
+            //robotTranformSystem = new RobotTranformSystem();
+            //robotRenderSystem = new RobotRenderSystem();
 
             collisionSystem = new CollisionSystem();
             houseSystem = new HouseSystem(this);
@@ -151,37 +151,37 @@ namespace WandererWorld
 
             heightMapSystem.CreateHeightMaps();
 
-            robotComponent = new RobotComponent
-            {                
-                Speed = 0,                
-                Texture = robotTexture,                
-                PlaneObjectWorld = Matrix.Identity,
-                TransformMatrices = new Matrix[robotModel.Bones.Count],
-                Effect = new BasicEffect(graphics.GraphicsDevice),
-                Scale = Matrix.CreateScale(0.5f),
-                Position = new Vector3(0f, 1300f, 0f),
-                RobotProjection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver2, 1280 / 720, 0.1f, 500f),
-                RobotView = Matrix.CreateLookAt(new Vector3(70, 50, 30), new Vector3(0, 0, 20), Vector3.Backward)
-            };
+            //robotComponent = new RobotComponent
+            //{                
+            //    Speed = 0,                
+            //    Texture = robotTexture,                
+            //    PlaneObjectWorld = Matrix.Identity,
+            //    TransformMatrices = new Matrix[robotModel.Bones.Count],
+            //    Effect = new BasicEffect(graphics.GraphicsDevice),
+            //    Scale = Matrix.CreateScale(0.5f),
+            //    Position = new Vector3(0f, 1300f, 0f),
+            //    RobotProjection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver2, 1280 / 720, 0.1f, 500f),
+            //    RobotView = Matrix.CreateLookAt(new Vector3(70, 50, 30), new Vector3(0, 0, 20), Vector3.Backward)
+            //};
 
-            robotCameraComponent = new RobotCameraComponent
-            {
-                MaxRotation = MathHelper.PiOver4,
-                RotationSpeed = 0.003f,
-                ModelRotation = 0,
-                Model = robotModel,
-                Direction = true,
-                LeftArmMatrix = robotModel.Bones["LeftArm"].Transform,
-                RightArmMatrix = robotModel.Bones["RightArm"].Transform,
-                LeftLegMatrix = robotModel.Bones["LeftLeg"].Transform,
-                RightLegMatrix = robotModel.Bones["RightLeg"].Transform,
-                Rotation = Quaternion.CreateFromAxisAngle(Vector3.Right, MathHelper.PiOver2) * Quaternion.CreateFromAxisAngle(Vector3.Up, MathHelper.Pi),
-                RotationInDegrees = 0
-            };
+            //robotCameraComponent = new RobotCameraComponent
+            //{
+            //    MaxRotation = MathHelper.PiOver4,
+            //    RotationSpeed = 0.003f,
+            //    ModelRotation = 0,
+            //    Model = robotModel,
+            //    Direction = true,
+            //    LeftArmMatrix = robotModel.Bones["LeftArm"].Transform,
+            //    RightArmMatrix = robotModel.Bones["RightArm"].Transform,
+            //    LeftLegMatrix = robotModel.Bones["LeftLeg"].Transform,
+            //    RightLegMatrix = robotModel.Bones["RightLeg"].Transform,
+            //    Rotation = Quaternion.CreateFromAxisAngle(Vector3.Right, MathHelper.PiOver2) * Quaternion.CreateFromAxisAngle(Vector3.Up, MathHelper.Pi),
+            //    RotationInDegrees = 0
+            //};
 
-            int robotId = EntityComponentManager.GetManager().CreateNewEntityId();
-            EntityComponentManager.GetManager().AddComponentToEntity(robotId, robotComponent);
-            EntityComponentManager.GetManager().AddComponentToEntity(robotId, robotCameraComponent);
+            //int robotId = EntityComponentManager.GetManager().CreateNewEntityId();
+            //EntityComponentManager.GetManager().AddComponentToEntity(robotId, robotComponent);
+            //EntityComponentManager.GetManager().AddComponentToEntity(robotId, robotCameraComponent);
             //robotSystem.CreateRobots();
         }
 

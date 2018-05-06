@@ -25,7 +25,7 @@ namespace WandererWorld.WandererContent
             scale = new Vector3(3, 5, 3);
             parentPosition = new Vector3(0, 1, 0);
 
-            children.Add(new Head(game, new Vector3(0, 4.5f, 0)));
+            children.Add(new Head(game, new Vector3(0, 4.8f, 0)));
             children.Add(new RightArm(game, new Vector3(2.2f, 1.5f, 0)));
             children.Add(new LeftArm(game, new Vector3(-2.2f, 1.5f, 0)));
             children.Add(new RightLeg(game, new Vector3(0.8f, -3.8f, 0)));
